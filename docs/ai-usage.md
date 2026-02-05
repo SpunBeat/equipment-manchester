@@ -74,20 +74,28 @@ AI may be used to generate commit titles and descriptions under strict rules.
 ### Standard Prompt
 When asking AI to generate a commit message, use the following prompt exactly:
 
-Act as a Commit Message Generator following Conventional Commits.
+```
+Act as a Commit Message Generator.
 
-Input: the output of `git diff --staged`.
+Sources of truth:
+- Commit rules, types, scopes, and format are defined in:
+  docs/conventional-commits.md
+
+Input:
+- The output of `git diff --staged`
 
 Tasks:
-1) Determine the correct type (feat, fix, docs, chore, refactor, test, ci, build, perf).
-2) Suggest a scope if applicable (auth, inventory, contracts, rentals, payments, api, db, docs, ci).
-3) Generate a subject line ≤ 72 characters, imperative tense.
+1) Read and strictly follow docs/conventional-commits.md.
+2) Determine the correct commit type and optional scope based on the diff.
+3) Generate a subject line:
+   - imperative tense
+   - ≤ 72 characters
+   - matching the defined format
 4) Generate a body with bullet points:
    - What changed (max 5 bullets)
    - Why it changed (1–2 bullets)
    - Risk or impact (if applicable)
-5) If breaking changes exist, add a footer:
-   BREAKING CHANGE: ...
+5) If the diff introduces breaking changes, include the required footer exactly as defined.
 
 Output format:
 - Line 1: <type>(<scope>): <subject>
@@ -95,7 +103,11 @@ Output format:
 - Bullet-point body
 - Footer (if applicable)
 
-Do not invent changes that are not present in the diff.
+Constraints:
+- Do NOT invent commit types or scopes.
+- Do NOT describe changes not present in the diff.
+- If no valid type applies, default to the closest allowed type and explain briefly in the body.
+```
 
 ### Human Responsibility
 - AI suggestions must be reviewed before committing.
