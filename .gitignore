@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+*.dbmdl
+
+# React Native
+android/.gradle
+android/local.properties
+android/app/build
+ios/Pods
+ios/build
+*.xcworkspace
+*.xcuserstate
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
